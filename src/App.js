@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {  Switch } from 'react-router-dom'
 import API from './API'
 import './App.css';
@@ -25,6 +25,7 @@ class App extends Component {
     .then(res => this.setState({
       agent: res
     }))
+    
   }
 
   handleClick = () => {
@@ -33,19 +34,38 @@ class App extends Component {
 
   render() {
   
-    const {agent } = this.state
+    // const {agent } = this.state
 
+    // return (
+      
+    //   <div className="App">
+    //   <h1>MODEL FILE</h1>
+    //   {this.state.enter ? 
+    //   <AgentDashboard agent={agent} />
+    //    : 
+    //   <Button onClick={this.handleClick} variant='contained' color='primary'>Enter</Button>
+    //   }
+    //       </div>
+
+      
+    // );
+
+
+    
     return (
-      
-      <div className="App">
-      <h1>MODEL FILE</h1>
-      {this.state.enter ? <AgentDashboard agent={agent} /> : 
-      <Button onClick={this.handleClick} variant='contained' color='primary'>Enter</Button>
-      }
-          </div>
+     
+      <Router>
+        <div>
+        <h1>MODEL FILE</h1>
+          
+          {/* <Route exact path="/" render={() => <div>Home</div>} /> */}
+          <Link to='/agent-dashboard'><Button variant='contained' color='primary'>Enter</Button></Link>
+          <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} agent={this.state.agent}/>} />
+        </div>
+      </Router>
 
-      
-    );
+
+    )
   }
 }
 
