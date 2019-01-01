@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Job = ({match, jobs, models}) => {
 
@@ -52,7 +53,7 @@ const Job = ({match, jobs, models}) => {
                 )}
 
             </div>
-
+            <Link to="/agent-dashboard" exact><p>Go back</p></Link>
         </div>   
 
     )}

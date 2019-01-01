@@ -6,14 +6,15 @@ import API from './API'
 import './App.css';
 import AgentDashboard from './containers/AgentDashboard'
 import Button from '@material-ui/core/Button'
-
+import Model from './components/Model'
+import Job from './components/Job'
 import './App.css'
 
 
 class App extends Component {
   state = {
     agent: '',
-    enter: false
+   
   }
 
   componentDidMount () {
@@ -28,39 +29,28 @@ class App extends Component {
     
   }
 
-  handleClick = () => {
-    this.setState({enter: true})
-  }
+  
 
   render() {
-  
-    // const {agent } = this.state
-
-    // return (
-      
-    //   <div className="App">
-    //   <h1>MODEL FILE</h1>
-    //   {this.state.enter ? 
-    //   <AgentDashboard agent={agent} />
-    //    : 
-    //   <Button onClick={this.handleClick} variant='contained' color='primary'>Enter</Button>
-    //   }
-    //       </div>
-
-      
-    // );
 
 
-    
+    const agent = this.state.agent
     return (
      
       <Router>
+         <div className="main">
         <div>
-        <h1>MODEL FILE</h1>
+        
+          <Route exact path="/" render={() => <div className="splash">
+            <h1>model file</h1>
+            <Link to='/agent-dashboard'><Button classname="btn" variant='contained' color='pink'>Enter</Button></Link>
+            </div>} />
+          </div>
           
-          {/* <Route exact path="/" render={() => <div>Home</div>} /> */}
-          <Link to='/agent-dashboard'><Button variant='contained' color='primary'>Enter</Button></Link>
-          <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} agent={this.state.agent}/>} />
+          <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} agent={agent}/>} />
+          <Route path={`/agent-dashboard/models/:modelId`}render={routerProps => <Model jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
+          <Route path={`/agent-dashboard/jobs/:jobId`}render={routerProps => <Job jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
+  
         </div>
       </Router>
 

@@ -8,6 +8,7 @@ const JobList = ({jobs}) => {
 const renderJobs = 
     Object.keys(jobs).map(jobID =>
     <div>
+        
         <Link key={jobID} to= {`agent-dashboard/jobs/${jobID}`}>{<h3>{jobs[jobID].brand}</h3>}</Link>
         <p>{jobs[jobID].description}</p>
         <p>CASTING:</p>

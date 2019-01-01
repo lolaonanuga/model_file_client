@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Model = ({match, models, jobs}) => {
 
     const model = models[match.params.modelId]
@@ -50,8 +50,7 @@ const Model = ({match, models, jobs}) => {
         <p>£{modelPay()}</p>
         </div>) : <p>No shoots</p>}
 
-
-        
+         <Link to="/agent-dashboard" exact><p>Go back</p></Link>
       </div>
     )
   }

@@ -30,3 +30,71 @@
     transform: rotate(360deg);
   }
 }
+
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  
+}
+
+.splash  {
+
+background: rgb(167, 167, 167);
+text-align: center;
+width: 50%;
+height: 100vh;
+background-size: cover;
+position: relative;
+display: flex;
+justify-content: space-around;
+align-items: center;
+
+}
+
+.btn {
+  background: white;
+}
+
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+.header {
+  grid-area: header;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+
+.wrapper {
+  display: grid;
+grid-gap: 10px;
+  grid-template-columns: 45% 25% 25%;
+  grid-template-areas:
+"header header header"
+  "content content sidebar"
+  "footer  footer  footer";
+  background-color: #fff;
+  color: #444;
+}
+
+
+.box {
+background-color: #444;
+color: #fff;
+border-radius: 5px;
+padding: 10px;
+font-size: 150%;
+}
+
+.header,
+.footer {
+background-color: #999;
+}
