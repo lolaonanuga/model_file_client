@@ -1,44 +1,55 @@
 import React from 'react'
-
+import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-class SignInForm extends React.Component {
+class NewJob extends React.Component {
+  
   state = {
-    username: '',
-    password: ''
+   brand: '',
+   description: ''
+   
   }
 
   handleSubmit = () => {
     console.log(this.state)
+    axios.post('http://localhost:3001/api/v1/jobs', {
+      brand: this.state.brand,
+      description: this.state.description,
+      agent_id: this.props.agent.id
+    })
+    
   }
 
-  handleChange = event =>
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+  }
 
   render () {
-    const { username, password } = this.state
+    const agent = this.props.agent
+    const { brand, description } = this.state
     const { handleChange, handleSubmit } = this
 
     return (
       <div>
+        <h3>Add new Job</h3>
         <TextField
-          id='usernameInput'
-          label='Username'
-          value={username}
+          id='brandInput'
+          label='brand'
+          value={brand}
           onChange={handleChange}
           margin='normal'
-          name='username'
+          name='brand'
         />
         <br />
         <TextField
-          id='passwordInput'
-          label='Password'
-          value={password}
+          id='descriptionInput'
+          label='Description'
+          value={description}
           onChange={handleChange}
           margin='normal'
-          name='password'
-          type='password'
+          name='description'
+          
         />
         <br />
         <Button onClick={handleSubmit} variant='contained' color='primary'>
@@ -49,4 +60,4 @@ class SignInForm extends React.Component {
   }
 }
 
-export default SignInForm
+export default NewJob

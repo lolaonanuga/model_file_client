@@ -18,7 +18,7 @@ const Model = ({match, models, jobs}) => {
     return (
       
       <div>
-           <h1>ADAA</h1>
+           
           <h1>{model.name}</h1>
         <img src={model.image1} />
         <img src={model.image2} />

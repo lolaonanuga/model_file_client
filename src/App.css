@@ -37,6 +37,10 @@ h1 {
   
 }
 
+p {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+}
 .splash  {
 
 background: rgb(167, 167, 167);
@@ -76,25 +80,42 @@ align-items: center;
 .wrapper {
   display: grid;
 grid-gap: 10px;
-  grid-template-columns: 45% 25% 25%;
+  grid-template-columns: 40% 50% 50%;
   grid-template-areas:
-"header header header"
-  "content content sidebar"
+  "header header header"
+  "sidebar content content "
   "footer  footer  footer";
   background-color: #fff;
   color: #444;
+  margin: 5% 5% 5% 5%;
 }
 
 
 .box {
 background-color: #444;
 color: #fff;
-border-radius: 5px;
+border-radius: 0px;
 padding: 10px;
 font-size: 150%;
 }
 
 .header,
 .footer {
-background-color: #999;
+background-color: rgb(189, 189, 190);
+}
+
+.sidebar {
+  background-color: rgb(204, 201, 201);
+}
+
+.content {
+  background-color: rgb(212, 211, 211);
+}
+
+.job-title {
+  color: rgb(156, 154, 154);
+}
+
+.job-title :hover {
+  color: rgb(61, 61, 61);
 }

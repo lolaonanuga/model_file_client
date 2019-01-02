@@ -1,41 +1,56 @@
 import React from 'react'
 import Job from './Job';
 import { Link } from 'react-router-dom'
+import Divider from '@material-ui/core/Divider';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
-const JobList = ({jobs}) => {
+
+
+const parseDate = date => new Date(date).toUTCString()
+
+const JobList = ({jobs, models}) => {
 
 
 const renderJobs = 
-    Object.keys(jobs).map(jobID =>
+<List component="nav" >
+    {Object.keys(jobs).map(jobID =>
     <div>
-        
-        <Link key={jobID} to= {`agent-dashboard/jobs/${jobID}`}>{<h3>{jobs[jobID].brand}</h3>}</Link>
+        <ListItem button>
+        <Link style={{color: '#fff' }}key={jobID} to= {`agent-dashboard/jobs/${jobID}`}>{
+        <div>
+        <h3 className="job-title">{jobs[jobID].brand}</h3>
+       
         <p>{jobs[jobID].description}</p>
-        <p>CASTING:</p>
-        <p>{jobs[jobID].casting.date}</p>
-
-        <p>SHOOT:</p>
-        <p>{jobs[jobID].shoot.date}</p>
-     </div>)
-
-    
-//   return (
-//     <div className="ui grid">
-//         <h1>Jobs</h1>
-    
-//       {jobs.map(job => 
-//     <div>
-//        <h3>{job.brand}</h3>
-//        <p>{job.description}</p>
-//         <p>CASTING:</p>
-//         <p>{job.casting.date}</p>
-
-//         <p>SHOOT:</p>
-//         <p>{job.shoot.date}</p>
-//       </div>
-//       )}
-//     </div>
-//   )
+       
+        {jobs[jobID].casting ?
+         <p>casting - {parseDate(jobs[jobID].casting.date)}</p>
+         :
+         <p>No casting</p>
+        }
+        {jobs[jobID].shoot ?
+        <p>shoot - {parseDate(jobs[jobID].shoot.date)}</p>
+        :
+        <p>No shoot</p>
+        }
+        
+        </div>
+        
+        }
+        
+        </Link>
+        </ListItem>
+        <Divider />
+     </div>
+     
+     
+     ) }
+     
+     </List>
+   
 
 
 

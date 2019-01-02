@@ -19,6 +19,7 @@ const styles = theme => ({
       justifyContent: 'space-around',
       overflow: 'hidden',
       backgroundColor: theme.palette.background.paper,
+     
     },
     gridList: {
       width: 500,
@@ -42,18 +43,18 @@ const ModelList = ({models}) => {
 // }
 
 
-//   const { classes } = props;
+  
 const renderModels =
 
     <div className={'root'}>
-      <GridList cellHeight={180} className={'gridList'}>
+      <GridList cellHeight={'180'} className={'gridList'}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Models</ListSubheader>
+        
         </GridListTile>
         {/* {models.map(model => ( */}
             {Object.keys(models).map(modelID => (
           <GridListTile key={models[modelID].id}>
-            <img src={`${models[modelID].image1}`} alt={models[modelID].id} />
+            <img src={require(`../images/tanah1.jpg`)} alt={models[modelID].id} />
             
             <Link key={models[modelID]} to= {`agent-dashboard/models/${modelID}`}>
             <GridListTileBar
@@ -79,4 +80,4 @@ const renderModels =
 //   classes: PropTypes.object.isRequired,
 // }
 
-export default ModelList
+export default ModelList 

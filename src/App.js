@@ -8,7 +8,9 @@ import AgentDashboard from './containers/AgentDashboard'
 import Button from '@material-ui/core/Button'
 import Model from './components/Model'
 import Job from './components/Job'
+import NewJob from './components/NewJob'
 import './App.css'
+
 
 
 class App extends Component {
@@ -35,6 +37,7 @@ class App extends Component {
 
 
     const agent = this.state.agent
+    
     return (
      
       <Router>
@@ -43,14 +46,15 @@ class App extends Component {
         
           <Route exact path="/" render={() => <div className="splash">
             <h1>model file</h1>
-            <Link to='/agent-dashboard'><Button classname="btn" variant='contained' color='pink'>Enter</Button></Link>
+            <Link to='/agent-dashboard'><Button className="btn" variant='contained' color='inherit'>Enter</Button></Link>
             </div>} />
           </div>
           
           <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} agent={agent}/>} />
           <Route path={`/agent-dashboard/models/:modelId`}render={routerProps => <Model jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
-          <Route path={`/agent-dashboard/jobs/:jobId`}render={routerProps => <Job jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
-  
+          <Route exact path={`/agent-dashboard/jobs/:jobId`}render={routerProps => <Job jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
+          {/* <Route  path={`/agent-dashboard/jobs/new`}render={routerProps => <NewJob models={agent.models} {...routerProps} /> } />
+   */}
         </div>
       </Router>
 

@@ -1,3 +1,4 @@
+
 class API {
     static init () {
       this.baseUrl = 'http://localhost:3001/api/v1'
@@ -31,7 +32,7 @@ class API {
       }).then(resp => resp.json())
     }
     
-   
+  
 
 
   }
