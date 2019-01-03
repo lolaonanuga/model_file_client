@@ -18,6 +18,7 @@ class NewJob extends React.Component {
       description: this.state.description,
       agent_id: this.props.agent.id
     })
+    .then(res => this.props.renderJob(res.data))
     
   }
 
@@ -26,7 +27,7 @@ class NewJob extends React.Component {
   }
 
   render () {
-    const agent = this.props.agent
+    const {agent, close} = this.props
     const { brand, description } = this.state
     const { handleChange, handleSubmit } = this
 
@@ -48,11 +49,12 @@ class NewJob extends React.Component {
           value={description}
           onChange={handleChange}
           margin='normal'
+          multiline
           name='description'
           
         />
         <br />
-        <Button onClick={handleSubmit} variant='contained' color='primary'>
+        <Button onClick={() => {handleSubmit(); close()}} variant='contained' color='primary'>
           SUBMIT
         </Button>
       </div>

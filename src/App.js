@@ -50,11 +50,10 @@ class App extends Component {
             </div>} />
           </div>
           
-          <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} agent={agent}/>} />
+          <Route path='/agent-dashboard' render={routerProps => <AgentDashboard {...routerProps} models={agent.models} jobs={agent.jobs} agent={agent}/>} />
           <Route path={`/agent-dashboard/models/:modelId`}render={routerProps => <Model jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
           <Route exact path={`/agent-dashboard/jobs/:jobId`}render={routerProps => <Job jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
-          {/* <Route  path={`/agent-dashboard/jobs/new`}render={routerProps => <NewJob models={agent.models} {...routerProps} /> } />
-   */}
+   
         </div>
       </Router>
 

@@ -8,21 +8,31 @@ import Job from '../components/Job'
 import NewJob from '../components/NewJob'
 import { Link } from 'react-router-dom'
 
-// const AgentDashboard = ({match, agent}) => 
+
 class AgentDashboard extends React.Component {
 
   state = {
-    newJob: false
+    newJob: false,
+    agent: this.props.agent,
+    jobs: this.props.jobs
+    
   }
 
   newJobToggle = () => {
     this.setState({newJob: !this.state.newJob
-     
     })
   }
 
+  renderJob = job => {
+    this.setState({jobs: [...this.state.jobs, job]
+    })
+  }
+
+ 
+
   render() {
-    const agent = this.props.agent
+    const { jobs} = this.state
+    const {models, agent} = this.props
     const match = this.props.match
 return (
   
@@ -37,31 +47,26 @@ return (
       
         <div className="box sidebar">
           <h2>models</h2>
-          <ModelList models={agent.models}  />
+          <ModelList models={models}  />
         </div>
 
         <div className="box content">
           <h2>jobs </h2>
           <div>{this.state.newJob ? 
           <div><a onClick={this.newJobToggle}><p>cancel</p></a>
-           <NewJob agent={agent} /> </div>
+           <NewJob  renderJob={this.renderJob} agent={agent} close={this.newJobToggle}/> </div>
           :
            <a onClick={this.newJobToggle}><p>add job</p></a>
            }
            </div>
           
 
-          <JobList jobs={agent.jobs} models={agent.models} />
+          <JobList jobs={jobs} models={agent.models} />
         </div>
 
     </div>
     )}/>
-    // <Route path={`${match.url}/models/:modelId`}render={routerProps => <Model jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
-    
-    
   
-    // <Route path={`${match.url}/jobs/:jobId`}render={routerProps => <Job jobs={agent.jobs} models={agent.models} {...routerProps} /> } />
-
 )
     }
     }

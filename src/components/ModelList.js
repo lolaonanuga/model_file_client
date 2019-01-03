@@ -30,17 +30,15 @@ const styles = theme => ({
     },
   })
 
-  const getName = (name) => { 
-   return name.split(' ')[0] }
   
-
+   const importAll = (r) => {
+    let images = {};
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+  }
+  const images = importAll(require.context('../images', true, /^\.\/.*\.(jpg|png|gif)$/))
+   
 const ModelList = ({models}) => {
-
-//     const renderModels = 
-//     Object.keys(models).map(modelID =>
-//         <Link key={modelID} to= {`agent-dashboard/models/${modelID}`}>{models[modelID].name}</Link>)
-//         return (<div>{renderModels}</div>)
-// }
 
 
   
@@ -51,10 +49,11 @@ const renderModels =
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
         
         </GridListTile>
-        {/* {models.map(model => ( */}
+        
             {Object.keys(models).map(modelID => (
           <GridListTile key={models[modelID].id}>
-            <img src={require(`../images/tanah1.jpg`)} alt={models[modelID].id} />
+          
+            <img src={images[`${models[modelID].image1}`]} alt={models[modelID].name} />
             
             <Link key={models[modelID]} to= {`agent-dashboard/models/${modelID}`}>
             <GridListTileBar

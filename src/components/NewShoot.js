@@ -2,23 +2,43 @@ import React from 'react'
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import ModelSelect from './ModelSelect'
 
 class NewShoot extends React.Component {
   
   state = {
-   brand: '',
-   description: ''
+    pay: 0,
+    location: '',
+    date:'',
+    time:'',
+    selectedModels: null
    
   }
 
   handleSubmit = () => {
-    console.log(this.state)
-    axios.post('http://localhost:3001/api/v1/shoots', {
-      brand: this.state.brand,
-      description: this.state.description,
-      agent_id: this.props.agent.id
-    })
     
+    axios.post('http://localhost:3001/api/v1/shoots', {
+     
+     
+      job_id: this.props.job.id,
+      pay: this.state.pay,
+      location: this.state.location,
+      date:this.state.date,
+      time:this.state.time,
+      model_ids: this.state.selectedModels
+    })
+    .then(res => this.props.addShoot(res.data))
+  }
+
+  
+
+  addModel = val => {
+    const id =  val.map(model =>  (model.value.toString()))
+    this.setState({
+      selectedModels: id
+    })
   }
 
   handleChange = event => {
@@ -26,33 +46,69 @@ class NewShoot extends React.Component {
   }
 
   render () {
-    const agent = this.props.agent
-    const { brand, description } = this.state
-    const { handleChange, handleSubmit } = this
+    const {models, close} = this.props
+    const {location, pay, date, time } = this.state
+    const { handleChange, handleSubmit, addModel } = this
 
     return (
       <div>
-        <h3>Add new Job</h3>
+        <h3>Add new Shoot</h3>
         <TextField
-          id='brandInput'
-          label='brand'
-          value={brand}
+          id='locationInput'
+          label='location'
+          value={location}
           onChange={handleChange}
           margin='normal'
-          name='brand'
+          name='location'
         />
         <br />
         <TextField
-          id='descriptionInput'
-          label='Description'
-          value={description}
+        id="date"
+        label="Date"
+        type="date"
+        value={date}
+        onChange={handleChange}
+        defaultValue="2019-01-01"
+        name='date'
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+        <br />
+        <TextField
+        id="time"
+        label="Time"
+        type="time"
+        value={time}
+        onChange={handleChange}
+        defaultValue="00:00"
+        name='time'
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: 300, // 5 min
+        }}
+      />
+        <br />
+        <TextField
+          id='Pay'
+          label='Pay rate per model (£)'
+          value={pay}
           onChange={handleChange}
           margin='normal'
-          name='description'
-          
+          name='pay'
         />
         <br />
-        <Button onClick={handleSubmit} variant='contained' color='primary'>
+        <ModelSelect models={models} handleChange={addModel} />
+        <br />
+
+
+
+
+
+
+        <Button onClick={() => {handleSubmit(); close()}} variant='contained' color='primary'>
           SUBMIT
         </Button>
       </div>

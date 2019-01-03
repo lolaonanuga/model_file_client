@@ -79,8 +79,8 @@ align-items: center;
 
 .wrapper {
   display: grid;
-grid-gap: 10px;
-  grid-template-columns: 40% 50% 50%;
+grid-gap: 1px;
+  grid-template-columns: 40% ;
   grid-template-areas:
   "header header header"
   "sidebar content content "
@@ -90,6 +90,29 @@ grid-gap: 10px;
   margin: 5% 5% 5% 5%;
 }
 
+.showPage {
+  background-color: #fff;
+  color: #444;
+  margin: 5% 5% 5% 5%;
+}
+
+.back {
+  float: right;
+}
+
+.main {
+  grid-area: main;
+}
+
+.section1 {
+  grid-area: section1;
+  background-color: rgb(204, 201, 201)
+}
+
+.section2 {
+  grid-area: section2;
+  background-color: rgb(204, 201, 201)
+}
 
 .box {
 background-color: #444;
@@ -118,4 +141,37 @@ background-color: rgb(189, 189, 190);
 
 .job-title :hover {
   color: rgb(61, 61, 61);
+}
+
+.flex-grid {
+  display: flex;
+  grid-gap: 10px;
+  align-items: stretch;
+  width: 100%;
+}
+.col {
+  flex: 1;
+  
+}
+.col-img {
+ 
+} 
+
+.flex-grid-image {
+  display: flex;
+  grid-gap: 10px;
+  width: 50%;
+}
+
+.gridImage {
+ 
+  max-width: 400px;
+  
+
+}
+
+@media (max-width: 400px) {
+  .flex-grid {
+    display: block;
+  }
 }

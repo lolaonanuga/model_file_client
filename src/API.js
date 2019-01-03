@@ -25,11 +25,19 @@ class API {
       return fetch('http://localhost:3001/api/v1/shoots').then(res => res.json())
     }
 
+    static getModels () {
+      return fetch('http://localhost:3001/api/v1/models').then(res => res.json())
+    }
 
     static removeModel (id) {
       return fetch(`http://localhost:3001/api/v1/models/${id}`, {
         method: 'DELETE'
       }).then(resp => resp.json())
+    }
+
+    static  parseDate = (date) => {
+      const dates = new Date(date)
+      return new Intl.DateTimeFormat().format(dates)
     }
     
   

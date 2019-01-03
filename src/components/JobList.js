@@ -7,10 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import API from '../API'
 
 
-
-const parseDate = date => new Date(date).toUTCString()
 
 const JobList = ({jobs, models}) => {
 
@@ -27,12 +26,12 @@ const renderJobs =
         <p>{jobs[jobID].description}</p>
        
         {jobs[jobID].casting ?
-         <p>casting - {parseDate(jobs[jobID].casting.date)}</p>
+         <p>casting - {API.parseDate(jobs[jobID].casting.date)}</p>
          :
          <p>No casting</p>
         }
         {jobs[jobID].shoot ?
-        <p>shoot - {parseDate(jobs[jobID].shoot.date)}</p>
+        <p>shoot - {API.parseDate(jobs[jobID].shoot.date)}</p>
         :
         <p>No shoot</p>
         }
