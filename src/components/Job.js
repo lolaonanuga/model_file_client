@@ -99,7 +99,7 @@ import API from '../API'
                     :
                     <div>{newShoot ? 
                         <div><a onClick={this.newShootToggle}><p>cancel</p></a>
-                         <NewShoot  close={this.newShootToggle} addShoot={this.renderShoot} models={models} job={job} agent={job.agent} /> </div>
+                         <NewShoot  close={this.newShootToggle} addShoot={this.renderShoot} models={casting ? getCastingModels(job, models) : models} job={job} agent={job.agent} /> </div>
                         :
                          <a onClick={this.newShootToggle}><p>add shoot</p></a>
                          }
