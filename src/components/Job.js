@@ -44,7 +44,7 @@ import API from '../API'
       renderShoot = shoot => {
         this.props.models.filter(model => shoot.models.map(mo => mo.id).includes(model.id)).map(model => model.shoots.push(shoot))
         this.setState({shoot: shoot
-        })
+        }, this.props.update())
         
       }
 
@@ -52,7 +52,7 @@ import API from '../API'
         this.props.models.filter(model => casting.models.map(mo => mo.id).includes(model.id)).map(model => model.castings.push(casting))
         
         this.setState({casting: casting
-        })
+        }, this.props.update())
       }
         
 
@@ -61,7 +61,7 @@ import API from '../API'
 
 
         render() {
-            const {models, match} = this.props
+            const {models, match, update} = this.props
             // const job = this.props.jobs[this.props.match.params.jobId]
            const {newShoot, newCasting, job, shoot, casting} = this.state
             const {getCastingModels, getShootModels} = this
@@ -99,7 +99,7 @@ import API from '../API'
                     :
                     <div>{newShoot ? 
                         <div><a onClick={this.newShootToggle}><p>cancel</p></a>
-                         <NewShoot  close={this.newShootToggle} addShoot={this.renderShoot} models={casting ? getCastingModels(job, models) : models} job={job} agent={job.agent} /> </div>
+                         <NewShoot update={update} close={this.newShootToggle} addShoot={this.renderShoot} models={casting ? getCastingModels(job, models) : models} job={job} agent={job.agent} /> </div>
                         :
                          <a onClick={this.newShootToggle}><p>add shoot</p></a>
                          }
@@ -127,7 +127,7 @@ import API from '../API'
                         :
                         <div>{newCasting ? 
                             <div><a onClick={this.newCastingToggle}><p>cancel</p></a>
-                             <NewCasting close={this.newCastingToggle} addCasting={this.renderCasting} models={models} job={job} agent={job.agent} /> </div>
+                             <NewCasting update={update} close={this.newCastingToggle} addCasting={this.renderCasting} models={models} job={job} agent={job.agent} /> </div>
                             :
                              <a onClick={this.newCastingToggle}><p>/add casting</p></a>
                              }

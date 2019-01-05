@@ -30,6 +30,7 @@ class AgentDashboard extends React.Component {
   renderJob = job => {
     this.setState({jobs: [...this.state.jobs, job]
     })
+    this.props.update()
   }
 
   changeFilter = (filter) => {
@@ -52,7 +53,7 @@ class AgentDashboard extends React.Component {
 
   render() {
     const { jobs, modelFilter} = this.state
-    const {models, agent} = this.props
+    const {models, agent, update} = this.props
     const match = this.props.match
 return (
   
@@ -77,7 +78,7 @@ return (
           <h2>jobs </h2>
           <div>{this.state.newJob ? 
           <div><a onClick={this.newJobToggle}><p>cancel</p></a>
-           <NewJob  renderJob={this.renderJob} agent={agent} close={this.newJobToggle}/> </div>
+           <NewJob renderJob={this.renderJob} agent={agent} close={this.newJobToggle}/> </div>
           :
            <a onClick={this.newJobToggle}><p>add job</p></a>
            }
