@@ -3,22 +3,24 @@ import ModelList from'../components/ModelList'
 import Navbar from '../components/Navbar'
 import JobList from '../components/JobList'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { withRouter} from 'react-router-dom'
 import Model from '../components/Model'
 import Job from '../components/Job'
 import Button from '@material-ui/core/Button'
 import NewJob from '../components/NewJob'
 import { Link } from 'react-router-dom'
-
+import API from '../API'
 
 class AgentDashboard extends React.Component {
 
   state = {
     newJob: false,
-    agent: this.props.agent,
-    jobs: this.props.jobs,
-    filteredModels: this.props.models,
+    agent: JSON.parse(localStorage.getItem('agent')),
+    jobs: JSON.parse(localStorage.getItem('agent')).jobs,
+    filteredModels: JSON.parse(localStorage.getItem('agent')).models,
     modelFilter: 'all',
-    models: this.props.models
+    models: JSON.parse(localStorage.getItem('agent')).models,
+    
 
   }
 
@@ -41,36 +43,43 @@ class AgentDashboard extends React.Component {
 
   getFilteredModels = () => {
     if (this.state.modelFilter === 'all') {
-      return this.props.models 
+      return this.state.models 
     }
     else if (this.state.modelFilter === 'men') {
-      return this.props.models.filter(model => model.sex === 'M')
+      return this.state.models.filter(model => model.sex === 'M')
     }
     else if (this.state.modelFilter === 'women') {
-      return  this.props.models.filter(model => model.sex === 'F')
+      return  this.state.models.filter(model => model.sex === 'F')
     }
   }
 
+
+
+ 
+
   render() {
-    const { jobs, modelFilter} = this.state
-    const {models, agent, update} = this.props
+    const { modelFilter} = this.state
+    const { agent, models, jobs} = this.state
+    const update = this.props
     const match = this.props.match
+    console.log(agent)
 return (
   
-    <Route exact path={match.url} render={() => (
+    // <Route exact path={match.url} render={() => (
 
       <div className="wrapper">
 
         <div className="box header">
           <h1>model file</h1>
           <h2>welcome, {agent.name}</h2>
+          
         </div>
       
-        <div className="box sidebar">
+          <div className="box sidebar">
           <h2>models</h2>
           <Button color={modelFilter === 'men' ? 'primary' : 'default'} onClick={() => this.changeFilter('men')}>men</Button> <Button color={modelFilter === 'women' ? 'primary' : 'default'} onClick={() => this.changeFilter('women')}>women</Button> <Button color={modelFilter === 'all' ? 'primary' : 'default'} onClick={() => this.changeFilter('all')} value='all'>all</Button>
           <ModelList models={this.getFilteredModels()}  />
-
+          <Route path={`/agent-dashboard/models`} render={ModelList} models={this.getFilteredModels()}  />
 
         </div>
 
@@ -85,13 +94,14 @@ return (
            </div>
           
 
-          <JobList jobs={jobs} models={agent.models} />
-        </div>
+          <JobList jobs={jobs} models={models} />
+        </div>  
 
     </div>
-    )}/>
+    // )}/>
   
-)
+
+    )
     }
     }
-export default AgentDashboard
+export default withRouter(AgentDashboard)

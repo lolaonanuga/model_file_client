@@ -1,6 +1,6 @@
 import React from 'react'
 import Model from './Model';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -40,7 +40,7 @@ const styles = theme => ({
    
 const ModelList = ({models}) => {
 
-
+  
   
 const renderModels =
 
@@ -79,4 +79,4 @@ const renderModels =
 //   classes: PropTypes.object.isRequired,
 // }
 
-export default ModelList 
+export default  withRouter(ModelList)
