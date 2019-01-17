@@ -65,7 +65,7 @@ class AgentDashboard extends React.Component {
     console.log(agent)
 return (
   
-    // <Route exact path={match.url} render={() => (
+ 
 
       <div className="wrapper">
 
@@ -79,8 +79,7 @@ return (
           <h2>models</h2>
           <Button color={modelFilter === 'men' ? 'primary' : 'default'} onClick={() => this.changeFilter('men')}>men</Button> <Button color={modelFilter === 'women' ? 'primary' : 'default'} onClick={() => this.changeFilter('women')}>women</Button> <Button color={modelFilter === 'all' ? 'primary' : 'default'} onClick={() => this.changeFilter('all')} value='all'>all</Button>
           <ModelList models={this.getFilteredModels()}  />
-          <Route path={`/agent-dashboard/models`} render={ModelList} models={this.getFilteredModels()}  />
-
+       
         </div>
 
         <div className="box content">
@@ -98,7 +97,7 @@ return (
         </div>  
 
     </div>
-    // )}/>
+  
   
 
     )

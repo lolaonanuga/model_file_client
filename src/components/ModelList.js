@@ -56,7 +56,7 @@ const renderModels =
             <img src={images[`${models[modelID].image1}`]} alt={models[modelID].name} />
             
             <Link key={models[modelID]} to= {`agent-dashboard/models/${modelID}`}>
-            <GridListTileBar
+            <GridListTileBar 
               title={models[modelID].name}
               subtitle={<span> {models[modelID].location}</span>}
               actionIcon={
